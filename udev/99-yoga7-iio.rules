@@ -1,0 +1,10 @@
+# Yoga 7 IIO hinge sensor — grant all users access to the device node and sysfs attributes.
+# Install: sudo cp 99-yoga7-iio.rules /etc/udev/rules.d/
+#          sudo udevadm control --reload && sudo udevadm trigger
+
+# Make the device node world-readable/writable.
+SUBSYSTEM=="iio", KERNEL=="iio:device1", MODE="0666"
+
+# Make the required sysfs attributes world-readable/writable so the app can configure the buffer.
+SUBSYSTEM=="iio", KERNEL=="iio:device1", \
+    RUN+="/bin/sh -c 'chmod a+rw /sys%p/scan_elements/in_angl0_en /sys%p/buffer/enable /sys%p/buffer/length 2>/dev/null; chmod a+r /sys%p/in_angl0_scale /sys%p/in_angl0_offset 2>/dev/null'"
