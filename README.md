@@ -1,10 +1,8 @@
 # Qt Melodica Simulator
 
-A Qt6/C++ desktop app that simulates a 37-key melodica:
+A qt6 app to play a melodica using a Lenovo Yoga 7's lid pitch sensor + the keyboard.
 
-- Keyboard keys control note on/off.
-- Yoga 7 hinge angle (IIO sensor) controls blow pressure (volume).
-- Sound is synthesized in real time with additive harmonics plus ADSR envelope.
+No Yoga 7? No issue! The app features a manual pressure slider!
 
 ## Features
 
@@ -12,12 +10,10 @@ A Qt6/C++ desktop app that simulates a 37-key melodica:
 - Octave shift with Left/Right arrows (base octave range 2-6).
 - Polyphonic voice engine using `QAudioSink`.
 - Hinge sensor reader thread using `/sys/bus/iio/devices/iio:device1/` and `/dev/iio:device1`.
-- Always-available manual pressure slider that can override low sensor pressure.
 
 ## Build Dependencies
 
 Generic dependencies:
-
 - Qt6 Widgets
 - Qt6 Multimedia
 - CMake 3.16+
@@ -25,32 +21,33 @@ Generic dependencies:
 
 <details>
 <summary>Windows</summary>
-*Note*: Lid angle sensor access on Windows does not work
-
-- Install [Qt 6.5](https://www.qt.io/download) with MSVC 2019 or 2022.
+<br>
+Note: The lid angle sensor access on Windows will not work
+<br>
+<pre><code>- Install [Qt 6.5](https://www.qt.io/download) with MSVC 2019 or 2022.
 - Install [CMake](https://cmake.org/download/) and add it to PATH.
 - Install [Ninja](https://ninja-build.org/) and add it to PATH.
+</code></pre>
 </details>
 
 <details>
 <summary>Debian/Ubuntu</summary>
-```bash
-sudo apt update
+<pre><code>sudo apt update
 sudo apt install qt6-base-dev qt6-multimedia-dev cmake ninja-build build-essential
-```
+</code></pre>
 </details>
 
 <details>
 <summary>Arch</summary>
-```bash
-sudo pacman -S qt6-base qt6-multimedia cmake ninja gcc
+<pre><code>sudo pacman -S qt6-base qt6-multimedia cmake ninja gcc
+</code></pre>
 ```
 </details>
 
 ## Build
 
 ```bash
-cd ./yoga7-melodica
+cd ./LidMelodica
 cmake -S . -B build -G Ninja
 cmake --build build
 ```
